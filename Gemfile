@@ -31,7 +31,6 @@ gem 'puma'
 
 # Use Bootstrap
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-gem 'bh', '~> 1.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
