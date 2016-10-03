@@ -37,4 +37,7 @@ Rails.application.configure do
 
   # Devise default URL option for mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Time columns will become time zone aware in Rails 5.1
+  config.active_record.time_zone_aware_types = [:datetime, :time]
 end
