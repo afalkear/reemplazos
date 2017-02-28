@@ -9,6 +9,11 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 5.0.6'
 # Use bootstrap
 gem 'bootstrap', '~> 4.0.0alpha4'
+# Tether is needed for bootstrap tooltips
+gem 'tether-rails'
+
+# Use knockout
+gem 'knockoutjs-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -46,4 +51,3 @@ gem 'puma'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
