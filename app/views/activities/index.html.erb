@@ -2,7 +2,7 @@
   <!-- Responsibles -->
   <div class="row">
     <div class="col-md-12">
-
+      <%= @schedule.inspect %>
     </div>
   </div>
 
@@ -38,12 +38,15 @@
         </tr>
         <%= render "hours" %>
       </table>
-      <%= button_to "Add hour", "#", class: "btn" %>
+      <%= button_to "Add hour", "#", class: "btn btn-default add-hour-button" %>
       <div class="add-hour-form">
-
+        <%= render "hours/new_hour_form" %>
       </div>
     </div>
   </div>
 
   <!-- Other actions? for example. confirm schedule, cancel schedule -->
+  <!-- Hours and days -->
+  <span class="rendered_hours"> <%= @hours.join(",") if @hours %> </span>
+  <span class="rendered_days"> <%= @days.join(",") if @days %> </span>
 </div>
