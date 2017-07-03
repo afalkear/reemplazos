@@ -1,10 +1,46 @@
+
+<h1>Knockout</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="activities-table">
+        <thead>
+          <th>
+            Monday
+          </th>
+          <th>
+            Tuesday
+          </th>
+          <th>
+            Wednesday
+          </th>
+        </thead>
+        <tbody data-bind="foreach: activities">
+          <tr>
+            <td>
+              <input data-bind="value: name"/>
+            </td>
+            <td>
+              <input data-bind="value: responsible" />
+            </td>
+            <td>
+              <input data-bind="value: start" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h1>Without knockout</h1>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <table class="activities-table">
         <tr>
           <td>
-            
+
           </td>
           <td>
             Lunes
