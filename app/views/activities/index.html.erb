@@ -1,35 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <h1> Hello user: <%= current_user.email %> </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <table class="activities-table">
         <tr>
-          <td>
-            
-          </td>
-          <td>
-            Lunes
-          </td>
-          <td>
-            Martes
-          </td>
-          <td>
-            Miércoles
-          </td>
-          <td>
-            Jueves
-          </td>
-          <td>
-            Viernes
-          </td>
-          <td>
-            Sábado
-          </td>
-          <td>
-            Domingo
-          </td>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Responsible</th>
         </tr>
-        <%= render "hours" %>
+        <%= render @activities %>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>New activity</h2>
+      <%= form_for @activity, url: {action: "create"} do |f| %>
+        <%= f.text_field :name, placeholder: "Name" %>
+        <%= f.date_field :date, placeholder: "Date" %>
+        <%= f.text_field :start, placeholder: "Start at" %>
+        <%= f.text_field :end, placeholder: "End at" %>
+        <%= f.select :responsible_id, @responsibles.map{|r| [r.name, r.id]}, {}, {class: "selectize"} %>
+        <%= f.submit "Create" %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -3,6 +3,10 @@
   border-collapse: collapse;
 }
 
-.activities-table td {
+.activities-table td, th {
   border: 1px solid black;
+}
+
+.activities-table th {
+  text-align: center;
 }

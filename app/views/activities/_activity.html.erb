@@ -1,0 +1,7 @@
+<tr>
+  <td><%= activity.name %></td>
+  <td><%= activity.date %></td>
+  <td><%= activity.start %></td>
+  <td><%= activity.end %></td>
+  <td><%= activity.responsible.name unless @activity.responsible.nil? %></td>
+</tr>
