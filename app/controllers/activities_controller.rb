@@ -19,6 +19,22 @@ class ActivitiesController < ApplicationController
     redirect_to activities_path
   end
 
+  def edit
+    @activity = Activity.find(params[:id])
+    @responsibles = Responsible.where(user_id: current_user.id)
+  end
+
+  def update
+    @activity = Activity.find(params[:id])
+    if @activity.update_attributes(activity_params)
+      flash[:notice] = "Activity successfully updated"
+    else
+      flash[:alert] = "Activity could not be updated due to: #{@activity.errors.full_messages}"
+    end
+
+    redirect_to activities_path
+  end
+
   def destroy
     activity = Activity.find(params[:id])
     
