@@ -1,8 +1,8 @@
 <tr>
   <td><%= activity.name %></td>
   <td><%= activity.date %></td>
-  <td><%= activity.start %></td>
-  <td><%= activity.end %></td>
+  <td><%= activity.start_at %></td>
+  <td><%= activity.end_at %></td>
   <td><%= activity.responsible.name unless activity.responsible.nil? %></td>
   <td><%= link_to "Edit", edit_activity_path(activity.id) %></td>
   <td><%= link_to "Destroy", activity_path(activity.id), method: :delete, data: {confirm: "Are you sure?"} %></td>
