@@ -1,8 +1,10 @@
 class AlarmMailer < ApplicationMailer
-  def send_alarm(responsible, activity)
-    default from: "soy.el.robot.sam@gmail.com"
+  default from: "soy.el.robot.sam@gmail.com"
 
-    @responsible = responsible
+  def send_alarm(activity)
+    
+    @user = User.find activity.user_id
+    @responsible = Responsible.find activity.responsible_id
     @activity = activity
     mail(to: @responsible.email, subject: "Reminder of your class")
   end
