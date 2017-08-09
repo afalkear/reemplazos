@@ -6,4 +6,8 @@ class User < ApplicationRecord
   has_many :activities
   has_many :responsibles
   has_many :alarms
+
+  def public_schedule
+    
+  end
 end

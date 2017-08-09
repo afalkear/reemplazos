@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @responsible.name %></h1>
+    <p>
+      This is a reminder that you are giving the class: <%= @activity.name %>[<%= @activity.start_at%> - <%= @activity.end_at %>] on <%= @activity.date %> <br>
+    </p>
+    <p>
+      You can view the entire schedule here: <%= @user.public_schedule %>.
+    </p>
+    <p>Thanks!</p>
+  </body>
+</html>
