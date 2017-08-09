@@ -3,7 +3,11 @@
   <td><%= activity.date %></td>
   <td><%= activity.start_at %></td>
   <td><%= activity.end_at %></td>
-  <td><%= activity.responsible.name unless activity.responsible.nil? %></td>
+  <td><%= activity.responsible.name %></td>
+  <td><%= render "alarms/alarms", 
+    alarms: activity.alarms, 
+    responsible_id: activity.responsible.id,
+    activity_id: activity.id %></td>
   <td><%= link_to "Edit", edit_activity_path(activity.id) %></td>
   <td><%= link_to "Destroy", activity_path(activity.id), method: :delete, data: {confirm: "Are you sure?"} %></td>
 </tr>

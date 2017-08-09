@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :user
   belongs_to :responsible
-  has_many :alarm
+  has_many :alarms
 
   validates :name, :date, :start, :end, :responsible_id, presence: true
 

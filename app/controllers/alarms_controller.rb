@@ -1,6 +1,12 @@
 class AlarmsController < ApplicationController
   before_action :authenticate_user!
 
+  def new
+    @alarm = Alarm.new
+    @activity_id = params[:activity_id]
+    @responsible_id = params[:responsible_id]
+  end
+  
   def create
     alarm = Alarm.new(alarm_params)
     alarm.user_id = current_user.id
@@ -28,7 +34,8 @@ class AlarmsController < ApplicationController
 
   private
   def alarm_params
-    params.require(:alarm).permit(:offset, 
+    params.require(:alarm).permit(:offset,
+                                  :offset_type,
                                   :responsible_id, 
                                   :activity_id)
   end

@@ -1,0 +1,4 @@
+<% alarms.each do |alarm| %>
+  <%= "(#{alarm.offset} #{alarm.offset_type})" %> 
+<% end %>
+<%= link_to "+", new_alarm_path(activity_id: activity_id, responsible_id: responsible_id) %>
