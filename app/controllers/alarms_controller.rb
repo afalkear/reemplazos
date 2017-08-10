@@ -1,6 +1,11 @@
 class AlarmsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @activity = Activity.find params[:activity_id]
+    @alarms = Alarm.where(activity_id: params[:activity_id])
+  end
+
   def new
     @alarm = Alarm.new
     @activity_id = params[:activity_id]

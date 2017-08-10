@@ -1,4 +1,12 @@
 <% alarms.each do |alarm| %>
-  (<%= "#{alarm.offset} #{alarm.offset_type}" %> <%= link_to "x", alarm_path(alarm.id), method: :delete, data: { confirm: "Are you sure?" } %>)
+  (
+    <%= "#{alarm.offset} #{alarm.offset_type}" %> 
+    <%= link_to alarm_path(alarm.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    <% end %>
+      )
 <% end %>
-<%= link_to "+", new_alarm_path(activity_id: activity_id, responsible_id: responsible_id) %>
+<%= link_to new_alarm_path(activity_id: activity_id, responsible_id: responsible_id) do %>
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+<% end %>
+
