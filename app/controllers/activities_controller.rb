@@ -6,9 +6,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
     @responsibles = Responsible.where(user_id: current_user.id)
 
-    @first_day = @activities.order(:date).first.date
-    @last_day = @activities.order(:date).last.date
-    @days = @activities.group(:date).count.count
+    @first_day = @activities.empty? ? Date.today : @activities.order(:date).first.date
+    @last_day = @activities.empty? ? Date.tomorrow : @activities.order(:date).last.date
+    @days = @activities.empty? ? 0 : @activities.group(:date).count.count
 
   end
 
