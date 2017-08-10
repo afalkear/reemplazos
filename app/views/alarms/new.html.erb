@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="column-md-12">
+    <div class="col-md-12">
       <h2>New alarm</h2>
       <%= form_for @alarm, url: {action: "create"} do |f| %>
         <%= f.hidden_field :activity_id, value: @activity_id %>

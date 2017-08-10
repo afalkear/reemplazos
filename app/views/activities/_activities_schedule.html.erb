@@ -1,0 +1,25 @@
+<% activities.group(:start).each do |activity| %>
+  <tr>
+    <th scope="row"><%= activity.start_at %></th>
+    <% activities.group(:date).each do |act| %>
+      <td>
+        <% acts = activities.where(start: activity.start, date: act.date) %>
+        <% acts.each do |a| %>
+          <%= "#{a.name} [#{a.start_at}-#{a.end_at}]" %>
+          <%= link_to "e", edit_activity_path(a.id) %>
+          <%= link_to "x", activity_path(a.id), method: :delete, data: {confirm: "Are you sure?"} %> 
+          <br>
+          <%= a.responsible.name %>
+          <%= render "alarms/alarms", alarms: a.alarms, activity_id: a.id, responsible_id: a.responsible.id %>
+          <br>
+        <% end %>
+        <div class="btn-group">
+          <%= link_to "New Activity", new_activity_path(activity: {start: activity.start, date: act.date}), class: "btn btn-outline-primary" %>
+        </div>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+
+<tr>
+</tr>

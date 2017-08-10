@@ -5,6 +5,16 @@ class ActivitiesController < ApplicationController
     @activities = Activity.where(user_id: current_user.id)
     @activity = Activity.new
     @responsibles = Responsible.where(user_id: current_user.id)
+
+    @first_day = @activities.order(:date).first.date
+    @last_day = @activities.order(:date).last.date
+    @days = @activities.group(:date).count.count
+
+  end
+
+  def new
+    @activity = Activity.new(activity_params)
+    @responsibles = Responsible.where(user_id: current_user.id)
   end
 
   def create
