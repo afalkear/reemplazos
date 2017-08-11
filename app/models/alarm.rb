@@ -10,10 +10,12 @@ class Alarm < ApplicationRecord
 
   def self.bulk_add(user_id, offset, offset_type)
     resp = check_if_valid_options(offset, offset_type)
+    resp[:count] = 0
     if resp[:success]
       acts = Activity.where(user_id: user_id)
       acts.each do |a|
         Alarm.create(user_id: user_id, activity_id: a.id, responsible_id: a.responsible.id, offset: offset, offset_type: offset_type)
+        resp[:count] = acts.count
       end
     end
     resp
@@ -21,7 +23,9 @@ class Alarm < ApplicationRecord
 
   def self.bulk_remove(user_id, offset, offset_type)
     resp = check_if_valid_options(offset, offset_type)
+    resp[:count] = 0
     if resp[:success]
+      resp[:count] = Alarm.where(user_id: user_id, offset: offset, offset_type: offset_type).count
       Alarm.where(user_id: user_id, offset: offset, offset_type: offset_type).map(&:destroy)
     end
 

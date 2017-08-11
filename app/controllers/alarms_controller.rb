@@ -33,7 +33,7 @@ class AlarmsController < ApplicationController
     )
 
     if resp[:success]
-      flash[:notice] = "Alarms created"
+      flash[:notice] = "#{resp[:count]} alarms created"
     else
       flash[:alert] = "Alarms not created due to: #{resp[:errors]}"
     end
@@ -49,7 +49,7 @@ class AlarmsController < ApplicationController
     )
 
     if resp[:success]
-      flash[:notice] = "Alarms removed"
+      flash[:notice] = "#{resp[:count]} alarms removed"
     else
       flash[:alert] = "Alarms could not be removed due to #{resp[:errors]}"
     end
