@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   root 'activities#index'
   resources :activities
   resources :responsibles
-  resources :alarms
+  resources :alarms do
+    collection do
+      post 'bulk_add'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

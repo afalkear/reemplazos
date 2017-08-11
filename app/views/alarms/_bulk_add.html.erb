@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Add alarm to all activities</h1>
+    <%= form_for Alarm.new, url: bulk_add_alarms_path do |f| %>
+      <%= f.hidden_field :bulk_add, value: true %>
+      <div class="form-group">
+        <%= f.text_field :offset %>
+        <%= f.select :offset_type, Alarm::VALID_OFFSETS %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Create" %>
+      </div>
+    <% end %>
+  </div>
+</div>

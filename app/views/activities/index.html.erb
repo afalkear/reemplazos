@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <% if false #old view%>
+<% if false #old view%>
   <div class="row">
     <div class="col-md-12">
       <table class="activities-table table">
@@ -47,6 +47,12 @@
       </table>
     </div>
   </div>
-  <% end %>
-  <%= render "form", activity: @activity, action: "create", responsibles: @responsibles %>
+<% end %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= render "form", activity: @activity, action: "create", responsibles: @responsibles %>
+    </div>
+    <div class="col-md-6">
+      <%= render "alarms/bulk_add" %>
+    </div>
 </div>

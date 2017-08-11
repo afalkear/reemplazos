@@ -25,6 +25,21 @@ class AlarmsController < ApplicationController
     redirect_to activities_path
   end
 
+  def bulk_add
+    resp = Alarm.bulk_add(
+      current_user.id, 
+      params[:alarm][:offset], 
+      params[:alarm][:offset_type]
+    )
+    if resp[:success]
+      flash[:notice] = "Alarms created"
+    else
+      flash[:alert] = "Alarms not created due to: #{resp[:errors]}"
+    end
+
+    redirect_to activities_path
+  end
+
   def destroy
     alarm = Alarm.find params[:id]
 
