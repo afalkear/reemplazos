@@ -24,4 +24,4 @@ production:
   <<: *default
   database: reemplazos_production
   username: reemplazos
-  password: ENV['reemplazos_database_password']
+  password: <%= ENV['REEMPLAZOS_DATABASE_PASSWORD'] %>
