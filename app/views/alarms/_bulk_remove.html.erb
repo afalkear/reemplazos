@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Remove all alarms with following conditions</h1>
+    <%= form_for Alarm.new, url: bulk_remove_alarms_path do |f| %>
+      <%= f.hidden_field :bulk_add, value: true %>
+      <div class="form-group">
+        <%= f.text_field :offset %>
+        <%= f.select :offset_type, Alarm::VALID_OFFSETS %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Remove" %>
+      </div>
+    <% end %>
+  </div>
+</div>

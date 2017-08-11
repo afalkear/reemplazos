@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :alarms do
     collection do
       post 'bulk_add'
+      post 'bulk_remove'
     end
   end
 

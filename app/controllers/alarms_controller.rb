@@ -31,10 +31,27 @@ class AlarmsController < ApplicationController
       params[:alarm][:offset], 
       params[:alarm][:offset_type]
     )
+
     if resp[:success]
       flash[:notice] = "Alarms created"
     else
       flash[:alert] = "Alarms not created due to: #{resp[:errors]}"
+    end
+
+    redirect_to activities_path
+  end
+
+  def bulk_remove
+    resp = Alarm.bulk_remove(
+      current_user.id,
+      params[:alarm][:offset],
+      params[:alarm][:offset_type]
+    )
+
+    if resp[:success]
+      flash[:notice] = "Alarms removed"
+    else
+      flash[:alert] = "Alarms could not be removed due to #{resp[:errors]}"
     end
 
     redirect_to activities_path
