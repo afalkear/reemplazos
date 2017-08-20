@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808231147) do
+ActiveRecord::Schema.define(version: 20170818125440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20170808231147) do
     t.time     "end"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "start_hour"
+    t.integer  "start_minutes"
+    t.integer  "end_hour"
+    t.integer  "end_minutes"
   end
 
   create_table "alarms", force: :cascade do |t|
@@ -34,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170808231147) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "offset_type"
+    t.boolean  "global"
   end
 
   create_table "responsibles", force: :cascade do |t|

@@ -7,20 +7,14 @@
 
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-hover table-bordered table-sm table-responsive">
-        <thead class="thead-inverse">
-          <tr>
-            <% unless @activities.empty? %>
-              <th>Hour</th>
-              <% @activities.group_by(&:date).each do |activity| %>
-                <th><%= "#{activity.first.strftime("%A")} #{activity.first.day}" %></th>
-              <% end %>
-            <% end %>
-            <tbody>
-              <%= render "activities_schedule", activities: @activities %>
-            </tbody>
-          </tr>
-        </thead>
+      <table class="table table-hover table-bordered table-sm">
+        <%= render "activities_schedule", 
+          activities: @activities,
+          days: @days,
+          first_day: @first_day,
+          hours: @hours,
+          first_hour: @first_hour
+        %>
       </table>
     </div>
   </div>

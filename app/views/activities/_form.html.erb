@@ -9,10 +9,10 @@
         <%= f.date_field :date, placeholder: "Date" %>
       </div>
       <div class="form-group">
-        <%= f.text_field :start, placeholder: "Start at" %>
+        <%= f.text_field :start_hour, placeholder: "Start at" %>
       </div>
       <div class="form-group">
-        <%= f.text_field :end, placeholder: "End at" %>
+        <%= f.text_field :end_hour, placeholder: "End at" %>
       </div>
       <div class="form-group">
         <%= f.select :responsible_id, responsibles.map{|r| [r.name, r.id]}, {}, {class: "selectize"} %>

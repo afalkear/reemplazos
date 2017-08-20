@@ -1,33 +1,65 @@
-<% unless activities.empty? %>
-  <% activities.group_by(&:start).each do |start_time| %>
+<% if days <= Activity::DAYS_FOR_FULL_SCHEDULE %>
+  <thead class="thead-inverse">
     <tr>
-      <th scope="row"><%= start_time.first.hour %></th>
-      <% activities.group_by(&:date).each do |dates| %>
-        <td>
-          <% acts = activities.where(start: start_time.first, date: dates.first) %>
-          <% acts.each do |a| %>
-            <%= "#{a.name}" %>
-            <%= link_to edit_activity_path(a.id) do %>
-              <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
-            <% end %>
-            <%= link_to activity_path(a.id), method: :delete, data: {confirm: "Are you sure?"} do %>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            <% end%>
-            <br>
-            <%= a.responsible.name %>
-            <%= link_to alarms_path(activity_id: a.id), class: "btn btn-outline-primary btn-sm" do %>
-              <i class="fa fa-bell"> <%= a.alarms.count %></i>
-            <% end %>
-            <% render "alarms/alarms", alarms: a.alarms, activity_id: a.id, responsible_id: a.responsible.id %>
-            <br>
-          <% end %>
-          <div class="btn-group full-width">
-            <% link_to "New Activity", new_activity_path(activity: {start: start_time.first, date: dates.first}), class: "btn btn-outline-primary full-width" %>
-          </div>
-        </td>
+      <th>Hour</th>
+      <% days.times do |offset| %>
+        <th><%= "#{(first_day + offset).strftime("%A")} #{(first_day + offset).day}" %></th>
       <% end %>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% hours.times do |offset|  %>
+      <tr>
+        <th scope="row"><%= first_hour + offset %></th>
+        <% days.times do |day_offset| %>
+          <td>
+            <% acts = activities.where(start_hour: first_hour+offset, date: first_day+day_offset) %>
+            <% acts.each do |a| %>
+              <%= render "activity_cell", activity: a, start_time: first_hour + offset, date: first_day + day_offset %>
+            <% end%>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+<% else  %>
+  <thead class="thead-inverse">
+    <tr>
+      <th>Hour</th>
+      <% activities.group_by(&:date).each do |activity| %>
+        <th><%= "#{activity.first.strftime("%A")} #{activity.first.day}" %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% activities.group_by(&:start).each do |start_time| %>
+      <tr>
+        <th scope="row"><%= start_time.first.hour %></th>
+        <% activities.group_by(&:date).each do |dates| %>
+          <td>
+            <% acts = activities.where(start: start_time.first, date: dates.first) %>
+            <% acts.each do |a| %>
+              <%= "#{a.name}" %>
+              <%= link_to edit_activity_path(a.id) do %>
+                <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+              <% end %>
+              <%= link_to activity_path(a.id), method: :delete, data: {confirm: "Are you sure?"} do %>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              <% end%>
+              <br>
+              <%= a.responsible.name %>
+              <%= link_to alarms_path(activity_id: a.id), class: "btn btn-outline-primary btn-sm" do %>
+                <i class="fa fa-bell"> <%= a.alarms.count %></i>
+              <% end %>
+              <% render "alarms/alarms", alarms: a.alarms, activity_id: a.id, responsible_id: a.responsible.id %>
+              <br>
+            <% end %>
+            <div class="btn-group full-width">
+              <% link_to "New Activity", new_activity_path(activity: {start: start_time.first, date: dates.first}), class: "btn btn-outline-primary full-width" %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 <% end %>
-<tr>
-</tr>

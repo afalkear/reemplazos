@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to edit_activity_path(activity.id), class: "btn btn-primary" do %>
+      <%= activity.name %> (<%= activity.responsible.name %>)
+    <% end %>
+    <% link_to activity_path(activity.id), method: :delete, data: {confirm: "Are you sure?"} do %>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    <% end%>
+    <%= link_to alarms_path(activity_id: activity.id), class: "btn btn-outline-primary btn-sm" do %>
+      <i class="fa fa-bell"> <%= activity.alarms.count %></i>
+    <% end %>
+    <% render "alarms/alarms", alarms: activity.alarms, activity_id: activity.id, responsible_id: activity.responsible.id %>
+    <div class="btn-group full-width">
+      <% link_to "New Activity", new_activity_path(activity: {start: start_time, date: date}), class: "btn btn-outline-primary full-width" %>
+    </div>
+  </div>
+</div>
+
+
+<% if false %>
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <%= activity.name %> (<%= activity.responsible.name %>)
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-1">
+    <div class="row">
+      <div class="col-md-12">
+        <%= link_to edit_activity_path(activity.id) do %>
+          <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-1">
+    <div class="row">
+      <div class="col-md-12">
+        <%= link_to activity_path(activity.id), method: :delete, data: {confirm: "Are you sure?"} do %>
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        <% end%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-1">
+    <div class="row">
+      <div class="col-md-12">
+        <%= link_to alarms_path(activity_id: activity.id), class: "btn btn-outline-primary btn-sm" do %>
+            <i class="fa fa-bell"> <%= activity.alarms.count %></i>
+          <% end %>
+          <% render "alarms/alarms", alarms: activity.alarms, activity_id: activity.id, responsible_id: activity.responsible.id %>
+        <div class="btn-group full-width">
+          <% link_to "New Activity", new_activity_path(activity: {start: start_time, date: date}), class: "btn btn-outline-primary full-width" %>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+
+</div>
+<% end %>

@@ -7,8 +7,27 @@ class ActivitiesController < ApplicationController
     @responsibles = Responsible.where(user_id: current_user.id)
 
     @first_day = @activities.empty? ? Date.today : @activities.order(:date).first.date
-    @last_day = @activities.empty? ? Date.tomorrow : @activities.order(:date).last.date
-    @days = @activities.empty? ? 0 : @activities.group(:date).count.count
+    @last_day = if @activities.empty?
+                  Date.tomorrow
+                elsif @activities.order(:date).last.date >= @first_day + 7.days
+                  @activities.order(:date).last.date
+                else
+                  @first_day + 7.days
+                end
+    @days = (@last_day - @first_day).to_i + 1
+    @first_hour = if @activities.empty?
+                    7
+                  else
+                    @activities.order(:start_hour).first.start_hour
+                  end
+    @last_hour = if @activities.empty?
+                   21
+                 elsif @activities.order(:start_hour).last.start_hour - @first_hour < 10
+                   @first_hour + 10
+                 else
+                   @activities.order(:start_hour).last.start_hour
+                 end
+    @hours = (@last_hour - @first_hour) + 1
 
   end
 
@@ -62,6 +81,6 @@ class ActivitiesController < ApplicationController
 
   private
   def activity_params
-    params.require(:activity).permit(:name, :date, :start, :end, :responsible_id)
+    params.require(:activity).permit(:name, :date, :start_hour, :start_minutes, :end_hour, :end_minutes, :responsible_id)
   end
 end
