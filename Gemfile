@@ -12,6 +12,9 @@ gem 'bootstrap', '~> 4.0.0alpha6'
 # Tether is needed for bootstrap tooltips
 gem 'tether-rails'
 
+# Logical model
+#gem 'logical_model', '>= 0.6.4'
+gem "typhoeus"
 # Use knockout
 gem 'knockoutjs-rails'
 

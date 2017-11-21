@@ -3,7 +3,7 @@
     <tr>
       <th>Hour</th>
       <% days.times do |offset| %>
-        <th><%= "#{(first_day + offset).strftime("%A")} #{(first_day + offset).day}" %></th>
+        <th><%= "#{(first_day + offset).strftime("%a")} #{(first_day + offset).day}" %></th>
       <% end %>
     </tr>
   </thead>
@@ -27,7 +27,7 @@
     <tr>
       <th>Hour</th>
       <% activities.group_by(&:date).each do |activity| %>
-        <th><%= "#{activity.first.strftime("%A")} #{activity.first.day}" %></th>
+        <th><%= "#{activity.first.strftime("%a")} #{activity.first.day}" %></th>
       <% end %>
     </tr>
   </thead>

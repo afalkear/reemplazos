@@ -2,6 +2,18 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    #@padma_time_slots = Typhoeus.get("localhost:3004/api/v0/time_slots", 
+    #                                 params: {
+    #                                  app_key: "zzz",
+    #                                  account_name: "development",
+    #                                  where: {
+    #                                    padma_uid: "daniela.massa"
+    #                                  }
+    #                                  })
+    #if @padma_time_slots.success?
+    #  json = ActiveSupport::JSON.decode(@padma_time_slots.body)
+    #  @padma_time_slots = json["collection"]
+    #end
     @activities = Activity.where(user_id: current_user.id)
     @activity = Activity.new
     @responsibles = Responsible.where(user_id: current_user.id)
