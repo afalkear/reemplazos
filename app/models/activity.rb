@@ -5,7 +5,7 @@ class Activity < ApplicationRecord
 
   DAYS_FOR_FULL_SCHEDULE = 14
 
-  validates :name, :date, :start_hour, :end_hour, :responsible_id, presence: true
+  validates :name, :date, :start_hour, :end_hour, presence: true
   validates_inclusion_of :start_hour, in: 0..24
   after_create :set_default_alarms
 
@@ -27,3 +27,4 @@ class Activity < ApplicationRecord
       responsible_id: responsible.id)
   end
 end
+#TODO poner un story para que avise si hay alguna activity sin alarm... también puede ser por color
