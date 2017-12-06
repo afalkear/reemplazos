@@ -27,18 +27,18 @@ class ActivitiesController < ApplicationController
                   @first_day + 7.days
                 end
     @days = (@last_day - @first_day).to_i + 1
-    @first_hour = if @activities.empty?
-                    7
-                  else
-                    @activities.order(:start_hour).first.start_hour
-                  end
-    @last_hour = if @activities.empty?
-                   21
-                 elsif @activities.order(:start_hour).last.start_hour - @first_hour < 10
-                   @first_hour + 10
-                 else
-                   @activities.order(:start_hour).last.start_hour
-                 end
+    @first_hour = 7 #if @activities.empty?
+    #                7
+    #              else
+    #                @activities.order(:start_hour).first.start_hour
+    #              end
+    @last_hour = 21 #if @activities.empty?
+                 #  21
+                 #elsif @activities.order(:start_hour).last.start_hour - @first_hour < 10
+                 #  @first_hour + 10
+                 #else
+                 #  @activities.order(:start_hour).last.start_hour
+                 #end
     @hours = (@last_hour - @first_hour) + 1
 
   end
