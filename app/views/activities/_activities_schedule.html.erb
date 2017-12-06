@@ -32,12 +32,12 @@
     </tr>
   </thead>
   <tbody>
-    <% activities.group_by(&:start).each do |start_time| %>
+    <% activities.group_by(&:start_hour).each do |start_time| %>
       <tr>
-        <th scope="row"><%= start_time.first.hour %></th>
+        <th scope="row"><%= start_time.first %></th>
         <% activities.group_by(&:date).each do |dates| %>
           <td>
-            <% acts = activities.where(start: start_time.first, date: dates.first) %>
+            <% acts = activities.where(start_hour: start_time.first, date: dates.first) %>
             <% acts.each do |a| %>
               <%= "#{a.name}" %>
               <%= link_to edit_activity_path(a.id) do %>
@@ -55,7 +55,7 @@
               <br>
             <% end %>
             <div class="btn-group full-width">
-              <% link_to "New Activity", new_activity_path(activity: {start: start_time.first, date: dates.first}), class: "btn btn-outline-primary full-width" %>
+              <% link_to "New Activity", new_activity_path(activity: {start_hour: start_time.first, date: dates.first}), class: "btn btn-outline-primary full-width" %>
             </div>
           </td>
         <% end %>
