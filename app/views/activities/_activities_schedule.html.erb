@@ -81,6 +81,9 @@
             <% acts.each do |a| %>
               <div class="btn-group full-width">
                 <%= link_to edit_activity_path(a.id), class: "btn btn-#{a.confirmed? ? "success" : "warning"} full-width" do %>
+                  <% if a.alarms.count == 0 %>
+                    <i class="fa fa-bell-slash" aria-hidden="true"></i>
+                  <% end %>
                   <%= "#{a.name}" %> - 
                   <%= a.responsible.name %>
                   <% link_to edit_activity_path(a.id) do %>
