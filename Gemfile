@@ -8,7 +8,7 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.6'
 # Use bootstrap
-gem 'bootstrap', '~> 4.0.0alpha6'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
 # Tether is needed for bootstrap tooltips
 gem 'tether-rails'
 

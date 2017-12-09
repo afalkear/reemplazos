@@ -10,11 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require knockout
 //= require knockout.mapping
 //= require tether
+//= require popper
+//= require bootstrap-sprockets
 //= require bootstrap
 //= require turbolinks
 //= require selectize
