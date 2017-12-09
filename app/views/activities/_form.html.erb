@@ -18,6 +18,10 @@
         <%= f.select :responsible_id, responsibles.map{|r| [r.name, r.id]}, {}, {class: "selectize"} %>
       </div>
       <div class="form-group">
+        <%= f.label :confirmed %>
+        <%= f.check_box :confirmed, checked: true %>
+      </div>
+      <div class="form-group">
         <%= f.submit "#{action}" %>
       </div>
     <% end %>
