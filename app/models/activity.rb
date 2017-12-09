@@ -27,4 +27,3 @@ class Activity < ApplicationRecord
       responsible_id: responsible.id)
   end
 end
-#TODO poner un story para que avise si hay alguna activity sin alarm... también puede ser por color
