@@ -1,4 +1,3 @@
-#TODO define @only_created_activities in controller
 <% if days <= Activity::DAYS_FOR_FULL_SCHEDULE %>
   <thead class="thead-inverse">
     <tr>
@@ -97,7 +96,7 @@
             <% end %>
             <div class="btn-group full-width">
               <%= link_to  new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "btn btn-outline-primary full-width" do %>
-                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <i class="fa fa-plus" aria-hidden="true"></i>
               <% end %>
             </div>
           </td>

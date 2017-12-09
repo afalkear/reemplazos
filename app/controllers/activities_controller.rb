@@ -14,9 +14,11 @@ class ActivitiesController < ApplicationController
     #  json = ActiveSupport::JSON.decode(@padma_time_slots.body)
     #  @padma_time_slots = json["collection"]
     #end
+
     @activities = Activity.where(user_id: current_user.id)
     @activity = Activity.new
     @responsibles = Responsible.where(user_id: current_user.id)
+    @only_created = params[:only_created] || false
 
     @first_day = @activities.empty? ? Date.today : @activities.order(:date).first.date
     @last_day = if @activities.empty?
