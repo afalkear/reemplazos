@@ -10,61 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818125440) do
+ActiveRecord::Schema.define(version: 20171209184135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", force: :cascade do |t|
-    t.string   "name"
-    t.date     "date"
-    t.integer  "responsible_id"
-    t.integer  "user_id"
-    t.time     "start"
-    t.time     "end"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "start_hour"
-    t.integer  "start_minutes"
-    t.integer  "end_hour"
-    t.integer  "end_minutes"
-  end
-
-  create_table "alarms", force: :cascade do |t|
-    t.string   "offset"
-    t.integer  "responsible_id"
-    t.integer  "user_id"
-    t.integer  "activity_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "offset_type"
-    t.boolean  "global"
-  end
-
-  create_table "responsibles", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.integer  "horario_id"
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.date "date"
+    t.integer "responsible_id"
+    t.integer "user_id"
+    t.time "start"
+    t.time "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.integer "start_hour"
+    t.integer "start_minutes"
+    t.integer "end_hour"
+    t.integer "end_minutes"
+    t.boolean "confirmed", default: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "alarms", id: :serial, force: :cascade do |t|
+    t.string "offset"
+    t.integer "responsible_id"
+    t.integer "user_id"
+    t.integer "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "offset_type"
+    t.boolean "global"
+  end
+
+  create_table "responsibles", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "horario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
