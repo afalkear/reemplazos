@@ -83,12 +83,10 @@
             <% if dates.first < Date.today %>
               <%= render "past_activities", activities: acts %>
             <% else %>
-              <%= render "activity_within_schedule", activities: acts %>
-              <div class="btn-group full-width">
-                <%= link_to new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "btn btn-outline-primary full-width" do %>
-                  <i class="fa fa-plus" aria-hidden="true"></i>
+                <%= link_to new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "activity-cell" do %>
+                  <%= render "activity_within_schedule", activities: acts %>
+                  <!-- i class="fa fa-plus" aria-hidden="true"></i -->
                 <% end %>
-              </div>
             <% end %>
           </td>
         <% end %>
