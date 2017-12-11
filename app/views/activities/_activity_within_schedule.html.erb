@@ -1,0 +1,21 @@
+<% activities.each do |a| %>
+  <div class="btn-group full-width">
+    <%= link_to edit_activity_path(a.id), class: "btn btn-#{a.confirmed? ? "success" : "warning"} full-width" do %>
+      <% if a.alarms.count == 0 %>
+        <i class="fa fa-bell-slash" aria-hidden="true"></i>
+      <% end %>
+      <%= "#{a.name}" %> - 
+      <%= a.responsible.name %>
+      <% link_to edit_activity_path(a.id) do %>
+        <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+      <% end %>
+      <% link_to alarms_path(activity_id: a.id), class: "btn btn-outline-primary btn-sm" do %>
+       <i class="fa fa-bell"> <%= a.alarms.count %></i>
+      <% end %>
+      <% link_to activity_path(a.id), method: :delete, data: {confirm: "Are you sure?"} do %>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      <% end%>
+    <% end %>
+    <% render "alarms/alarms", alarms: a.alarms, activity_id: a.id, responsible_id: a.responsible.id %>
+  </div>
+<% end %>

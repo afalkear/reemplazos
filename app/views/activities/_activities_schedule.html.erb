@@ -66,8 +66,10 @@
   <thead class="thead-inverse">
     <tr>
       <th>Hour</th>
-      <% activities.group_by(&:date).each do |activity| %>
-        <th><%= "#{activity.first.strftime("%a")} #{activity.first.day}" %></th>
+      <% activities.order(date: :asc).group_by(&:date).each do |activity| %>
+        <th <%= "class=past-activity" if activity.first < Date.today  %>>
+          <%= "#{activity.first.strftime("%a")} #{activity.first.day}" %>
+        </th>
       <% end %>
     </tr>
   </thead>
@@ -75,35 +77,19 @@
     <% (first_hour..last_hour).each do |start_time| %>
       <tr>
         <th scope="row"><%= start_time %></th>
-        <% activities.group_by(&:date).each do |dates| %>
-          <td>
+        <% activities.order(date: :asc).group_by(&:date).each do |dates| %>
+          <td <%= "class=past-activity" if dates.first < Date.today %>>
             <% acts = activities.where(start_hour: start_time, date: dates.first) %>
-            <% acts.each do |a| %>
+            <% if dates.first < Date.today %>
+              <%= render "past_activities", activities: acts %>
+            <% else %>
+              <%= render "activity_within_schedule", activities: acts %>
               <div class="btn-group full-width">
-                <%= link_to edit_activity_path(a.id), class: "btn btn-#{a.confirmed? ? "success" : "warning"} full-width" do %>
-                  <% if a.alarms.count == 0 %>
-                    <i class="fa fa-bell-slash" aria-hidden="true"></i>
-                  <% end %>
-                  <%= "#{a.name}" %> - 
-                  <%= a.responsible.name %>
-                  <% link_to edit_activity_path(a.id) do %>
-                    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
-                  <% end %>
-                  <% link_to alarms_path(activity_id: a.id), class: "btn btn-outline-primary btn-sm" do %>
-                   <i class="fa fa-bell"> <%= a.alarms.count %></i>
-                  <% end %>
-                  <% link_to activity_path(a.id), method: :delete, data: {confirm: "Are you sure?"} do %>
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  <% end%>
+                <%= link_to new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "btn btn-outline-primary full-width" do %>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
                 <% end %>
-                <% render "alarms/alarms", alarms: a.alarms, activity_id: a.id, responsible_id: a.responsible.id %>
               </div>
             <% end %>
-            <div class="btn-group full-width">
-              <%= link_to new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "btn btn-outline-primary full-width" do %>
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              <% end %>
-            </div>
           </td>
         <% end %>
       </tr>
