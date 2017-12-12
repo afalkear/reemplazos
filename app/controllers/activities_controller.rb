@@ -93,6 +93,13 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def delete_day
+    activities = Activity.where(date: Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i))
+    activities.destroy_all
+
+    redirect_to activities_path
+  end
+
   private
   def activity_params
     params.require(:activity).permit(:name, :date, :start_hour, :start_minutes, :end_hour, :end_minutes, :responsible_id, :confirmed)

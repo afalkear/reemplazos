@@ -1,9 +1,11 @@
-<% if days <= Activity::DAYS_FOR_FULL_SCHEDULE %>
+<% if false && days <= Activity::DAYS_FOR_FULL_SCHEDULE %>
   <thead class="thead-inverse">
     <tr>
       <th>Hour</th>
       <% days.times do |offset| %>
-        <th><%= "#{(first_day + offset).strftime("%a")} #{(first_day + offset).day}" %></th>
+        <th>
+          <%= "#{(first_day + offset).strftime("%a")} #{(first_day + offset).day}" %>
+        </th>
       <% end %>
     </tr>
   </thead>
@@ -69,6 +71,9 @@
       <% activities.order(date: :asc).group_by(&:date).each do |activity| %>
         <th <%= "class=past-activity" if activity.first < Date.today  %>>
           <%= "#{activity.first.strftime("%a")} #{activity.first.day}" %>
+          <%= link_to delete_day_activities_path(year: activity.first.year, month: activity.first.month, day: activity.first.day) do %>
+            <i class="fa fa-trash" aria-hidden="true" ></i>
+          <% end %>
         </th>
       <% end %>
     </tr>

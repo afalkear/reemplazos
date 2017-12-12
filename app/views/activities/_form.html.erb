@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>New activity</h2>
+    <h2><%= activity.new_record? ? "New" : "Edit" %> activity</h2>
     <%= form_for activity, url: {action: action} do |f| %>
       <div class="form-group">
         <%= f.text_field :name, placeholder: "Name" %>

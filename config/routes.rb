@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'activities#index'
-  resources :activities
+  resources :activities do
+    collection do
+      get 'delete_day'
+    end
+  end
   resources :responsibles
   resources :alarms do
     collection do
