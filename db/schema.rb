@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20171209184135) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "offset_type"
-    t.boolean "global"
   end
 
   create_table "responsibles", id: :serial, force: :cascade do |t|
