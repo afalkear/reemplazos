@@ -1,0 +1,20 @@
+{
+  "name": "@stimulus/multimap",
+  "version": "0.9.0",
+  "description": "Multimap maps one key to a set of many values",
+  "repository": "https://github.com/stimulusjs/stimulus",
+  "author": "Basecamp, LLC",
+  "contributors": [
+    "Javan Makhmali <javan@javan.us>",
+    "Sam Stephenson <sstephenson@gmail.com>"
+  ],
+  "main": "dist/module/index.js",
+  "types": "dist/types/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
