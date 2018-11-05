@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    #@padma_time_slots = Typhoeus.get("localhost:3004/api/v0/time_slots", 
+    #@padma_time_slots = Typhoeus.get("localhost:3004/api/v0/time_slots",
     #                                 params: {
     #                                  app_key: "zzz",
     #                                  account_name: "development",
@@ -42,7 +42,6 @@ class ActivitiesController < ApplicationController
                  #  @activities.order(:start_hour).last.start_hour
                  #end
     @hours = (@last_hour - @first_hour) + 1
-
   end
 
   def new
@@ -80,13 +79,13 @@ class ActivitiesController < ApplicationController
 
   def destroy
     activity = Activity.find(params[:id])
-    
+
     if activity.destroy
       flash[:notice] = "Activiy successfully destroyed"
     else
       flash[:alert] = "Activity could not be destroyed"
     end
-    
+
     respond_to do |format|
       format.json { render json: "destroyed" }
       format.html { redirect_to activities_path }

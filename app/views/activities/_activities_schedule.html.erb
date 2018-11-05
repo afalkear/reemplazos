@@ -68,10 +68,10 @@
   <thead class="thead-inverse">
     <tr>
       <th>Hour</th>
-      <% activities.order(date: :asc).group_by(&:date).each do |activity| %>
-        <th <%= "class=past-activity" if activity.first < Date.today  %>>
-          <%= "#{activity.first.strftime("%a")} #{activity.first.day}" %>
-          <%= link_to delete_day_activities_path(year: activity.first.year, month: activity.first.month, day: activity.first.day) do %>
+      <% (Date.today.at_beginning_of_week..Date.today.at_end_of_week).each do |date| %>
+        <th <%= "class=past-activity" if date < Date.today  %>>
+          <%= "#{date.strftime("%a")} #{date.day}" %>
+          <%= link_to delete_day_activities_path(year: date.year, month: date.month, day: date.day) do %>
             <i class="fa fa-trash" aria-hidden="true" ></i>
           <% end %>
         </th>
@@ -82,14 +82,14 @@
     <% (first_hour..last_hour).each do |start_time| %>
       <tr>
         <th scope="row"><%= start_time %></th>
-        <% activities.order(date: :asc).group_by(&:date).each do |dates| %>
-          <td <%= "class=past-activity" if dates.first < Date.today %>>
-            <% acts = activities.where(start_hour: start_time, date: dates.first) %>
-            <% if dates.first < Date.today %>
+        <% (Date.today.at_beginning_of_week..Date.today.at_end_of_week).each do |date| %>
+          <td <%= "class=past-activity" if date < Date.today %>>
+            <% acts = activities.where(start_hour: start_time, date: date) %>
+            <% if date < Date.today %>
               <%= render "past_activities", activities: acts %>
             <% else %>
               <%= render "activity_within_schedule", activities: acts %>
-              <%= link_to new_activity_path(activity: {start_hour: start_time, date: dates.first}), class: "btn btn-outline-primary" do %>
+              <%= link_to new_activity_path(activity: {start_hour: start_time, date: date}), class: "btn btn-outline-primary" do %>
                 <i class="fa fa-plus" aria-hidden="true"></i>
               <% end %>
               </div>
