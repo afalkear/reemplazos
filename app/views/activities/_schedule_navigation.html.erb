@@ -1,0 +1,23 @@
+<div class="col-md-12">
+  <div class="float-center">
+    <%= link_to "today", activities_path(first_day: Date.today) %>
+  </div>
+  <span class="float-left">
+    <%= link_to "back", activities_path(
+      first_day: (
+        @weekly_days.first - ((@view_type == "weekly") ? 1.week : 1.month)
+      ),
+      view_type: @view_type
+    )
+      %>
+  </span>
+  <span class="float-right">
+    <%= link_to "next", activities_path(
+      first_day: (
+        @weekly_days.first + ((@view_type == "weekly") ? 1.week : 1.month)
+      ),
+      view_type: @view_type
+    )
+      %>
+  </span>
+</div>
