@@ -17,6 +17,13 @@ Rails.application.routes.draw do
       post 'bulk_remove'
     end
   end
+  namespace 'ipn' do
+    resources :invoices do
+      member do
+        post 'paypal_ipn'
+      end
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
