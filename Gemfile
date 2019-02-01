@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.2.2'
 # Use postgreSQL
 gem 'pg'
 # Use SCSS for stylesheets
@@ -14,14 +14,14 @@ gem 'tether-rails'
 
 # Logical model
 #gem 'logical_model', '>= 0.6.4'
-gem "typhoeus"
+gem "typhoeus", "~> 1.3.1"
 # Use knockout
 gem 'knockoutjs-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.2.1'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
