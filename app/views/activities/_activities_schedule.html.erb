@@ -64,11 +64,11 @@
       </tr>
     <% end %>
   </tbody>
-<% else %>
+<% elsif @view_type == "weekly" %>
   <thead class="thead-inverse">
     <tr>
       <th>Hour</th>
-      <% (Date.today.at_beginning_of_week..Date.today.at_end_of_week).each do |date| %>
+      <% @weekly_days.each do |date| %>
         <th <%= "class=past-activity" if date < Date.today  %>>
           <%= "#{date.strftime("%a")} #{date.day}" %>
           <%= link_to delete_day_activities_path(year: date.year, month: date.month, day: date.day) do %>
@@ -82,7 +82,7 @@
     <% (first_hour..last_hour).each do |start_time| %>
       <tr>
         <th scope="row"><%= start_time %></th>
-        <% (Date.today.at_beginning_of_week..Date.today.at_end_of_week).each do |date| %>
+        <% @weekly_days.each do |date| %>
           <td <%= "class=past-activity" if date < Date.today %>>
             <% acts = activities.where(start_hour: start_time, date: date) %>
             <% if date < Date.today %>
@@ -98,5 +98,16 @@
         <% end %>
       </tr>
     <% end %>
+  </tbody>
+<% else %>
+  <tbody>
+  <% beginning_date = Date.today.at_beginning_of_month %>
+    <tr>
+    <% (beginning_date..(beginning_date + 1.week)).each do |date| %>
+      <td>
+        <%= date unless date > Date.today.at_end_of_month %>
+      </td>
+    <% end %>
+    </tr>
   </tbody>
 <% end %>

@@ -42,6 +42,9 @@ class ActivitiesController < ApplicationController
                  #  @activities.order(:start_hour).last.start_hour
                  #end
     @hours = (@last_hour - @first_hour) + 1
+    @view_type = params[:view_type] || "monthly"
+    first_day = params[:first_day] ? params[:first_day].to_date : Date.today
+    @weekly_days = (first_day.at_beginning_of_week..first_day.at_end_of_week)
   end
 
   def new

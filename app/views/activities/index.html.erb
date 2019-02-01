@@ -9,9 +9,10 @@
     <%= @padma_time_slots unless @padma_time_slots.nil? %>
   </div>
   <div class="row">
+    <%= render "schedule_navigation" %>
     <div class="col-md-12">
       <table class="table table-hover table-bordered table-sm">
-        <%= render "activities_schedule", 
+        <%= render "activities_schedule",
           activities: @activities,
           days: @days,
           first_day: @first_day,
