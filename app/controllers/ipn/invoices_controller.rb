@@ -1,4 +1,7 @@
+require 'net/http'
+
 class Ipn::InvoicesController < ApplicationController
+  protect_from_forgery except: [:paypal_ipn]
   def paypal_ipn
     # check if this works
     response = validate_IPN_notification(request.raw_post)
