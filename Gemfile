@@ -42,6 +42,15 @@ gem 'figaro'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+# Profiler for development and production apps
+gem 'rack-mini-profiler', require: false, group: :development
+# For memory profiling
+gem 'memory_profiler', group: :development
+# For call-stack profiling flamegraphs
+gem 'flamegraph', group: :development
+gem 'stackprof', group: :development
+# kill n+1 queries
+gem 'bullet', group: 'development'
 
 # Use device for authentication
 gem 'devise'
